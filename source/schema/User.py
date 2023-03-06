@@ -32,5 +32,13 @@ class User(object):
         self.achievementListVersion = achievementListVersion
         self.imageData = imageData
 
+    def __eq__(self, __o: object) -> bool:
+        if isinstance(__o, User):
+            return self.name == __o.name
+        return False
+
+    def __hash__(self) -> int:
+        return hash(self.name)
+
     def __repr__(self):
         return f"User(name={self.name}, workouts={self.totalWorkouts}, xp={self.xp})"

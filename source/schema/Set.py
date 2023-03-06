@@ -1,9 +1,11 @@
 from typing import Optional
+import weakref
 
 
 class Set(object):
     def __init__(
         self,
+        exercise: object,
         reps: Optional[int] = None,
         weight: Optional[float] = None,
         duration: Optional[float] = None,
@@ -16,6 +18,7 @@ class Set(object):
         rpe: Optional[int] = None,
         rir: Optional[int] = None,
     ):
+        self.exercise = weakref.ref(exercise)
         self.reps = reps
         self.weight = weight
         self.duration = duration
@@ -29,4 +32,4 @@ class Set(object):
         self.rir = rir
 
     def __repr__(self):
-        return f"Set({', '.join(f'{k}={v}' for k, v in self.__dict__.items() if v is not None)})"
+        return f"Set({', '.join([f'{k}={v}' for k, v in self.__dict__.items() if v is not None and k != 'exercise'])})"
