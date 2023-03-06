@@ -31,5 +31,8 @@ class Set(object):
         self.rpe = rpe
         self.rir = rir
 
+    def __getitem__(self, key):
+        return self.__dict__[key]
+
     def __repr__(self):
         return f"Set({', '.join([f'{k}={v}' for k, v in self.__dict__.items() if v is not None and k != 'exercise'])})"

@@ -1,5 +1,6 @@
-from schema.Workout import Workout
 from schema.User import User
+from schema.Settings import Settings
+from schema.Workout import Workout
 
 
 class UserData(object):
@@ -16,9 +17,9 @@ class UserData(object):
         self.typeList = typeList["list"]
         self.achievements = achievements
         self.templateList = templateList
-        self.user = User(**user)
+        self.settings = Settings(**settings, data=self)
+        self.user = User(**user, data=self, settings=self.settings)
         self.workouts = list(map(lambda x: Workout(**x, user=self.user), workouts))
-        self.settings = settings
         self.version = version
 
     def __repr__(self):

@@ -1,9 +1,12 @@
 from typing import Optional
+import weakref
 
 
 class User(object):
     def __init__(
         self,
+        data: object,
+        settings: object,
         dateCreated: str,
         totalWorkouts: int,
         totalExercises: int,
@@ -18,6 +21,8 @@ class User(object):
         weight: Optional[float] = None,
         imageData: Optional[str] = None,
     ):
+        self.data = weakref.ref(data)
+        self.settings = weakref.ref(settings)
         self.dateCreated = dateCreated
         self.name = name
         self.weight = weight
